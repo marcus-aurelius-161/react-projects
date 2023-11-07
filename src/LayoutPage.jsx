@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import ApiPage from "./ApiPage";
 
@@ -9,6 +9,8 @@ function LayoutPage() {
     const [popUp, setPopUp] = useState(false);
     const navigate = useNavigate();
     
+
+    
     const logOut = () => {
         localStorage.removeItem("photo")
         localStorage.removeItem("name")
@@ -16,7 +18,7 @@ function LayoutPage() {
     }
     
     return(
-        <div className="form-page">
+        userName ? (<div className="form-page">
             {popUp && <div className="pop-up">
                 <button className="close-button" onClick={() => setPopUp(false)}>cancel</button>
                 <button className="log-out-button" onClick={logOut}>Log out</button>
@@ -42,7 +44,7 @@ function LayoutPage() {
             </nav>          
             
                 <Outlet />
-        </div>
+        </div>) :  <Navigate to="/get-started" />
         
     )
 }
