@@ -54,7 +54,6 @@ body {
   align-items: center;  
 }
 
-
 .sign-in-container {
   background-color: white;
   width: 794px;
@@ -75,8 +74,52 @@ body::-webkit-scrollbar {
   height: 100%;
   position: absolute;
   background-color: black;
-  opacity: 35%;
+  opacity: 70%;
 }
+
+.log-out-button{
+  background-color: rgb(88, 188, 255);
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.log-out-button:hover {
+  background-color: #4c8ff7; 
+  transform: scale(1.1); 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+    background-color: #ff5733; 
+    color: #fff; 
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .close-button:hover {
+    background-color: #ff944d; 
+    transform: scale(1.1);
+  }
+
 
 .sign-in-button {
   background-color: #4980C0;
@@ -86,13 +129,28 @@ body::-webkit-scrollbar {
   width: 395px;
   height: 75px;
   font-family: 'Montserrat', sans-serif;
-  transition: background-color 0.6s;
+  transition: all 0.6s;
   cursor: pointer;
 }
 
+.sign-in-button::before {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: #589DEC;
+  transition: left 0.6s;
+}
+
+.sign-in-button:hover::before {
+  left: 0;
+}
 
 .sign-in-button:hover {
-  background-color: #589DEC;
+  background-color: #73b4ff;
+  color: white;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .get-started-text {
@@ -273,26 +331,36 @@ body::-webkit-scrollbar {
   }
 
   .form-table{
-    
+    width: 200%;
     border-collapse: collapse;   
     overflow: hidden; 
+    height: 650px;
   }  
 
   .table-container {
     overflow-x: scroll;
-    width: 600px;
+    width: 1200px;
     border-radius: 10px;
     margin: 25px auto; 
   }
-  
-  .form-table thead {
+
+  .form-table thead{
+    height: 90px;
     background-color: white;
     border-bottom: 1px solid #315C8E;
+  }
+  
+  .form-table thead th {
     font-family: "Helvetica", sans-serif;
+    color: #353535;
     font-size: 14px;
     font-weight: 700;
     text-align: center;
   }
+  
+  .form-table tbody {
+    border-radius: 25px;
+  }  
   
   .form-table tbody td {
     font-family: "Montserrat", sans-serif;
@@ -301,6 +369,7 @@ body::-webkit-scrollbar {
     text-align: center;
     width: 75px;
   }
+  
 
   .chevron {
     cursor: pointer;
@@ -314,14 +383,17 @@ body::-webkit-scrollbar {
   .odd-row {
     background-color: #F6F6F6;
   }
-
+  
   .pagination{
     display: flex;
     align-items: center;
-    justify-content: center;
-    
+    justify-content: center;    
   }
 
+  .chevron:hover {
+    transform: scale(1.2);
+  }
+  
   .pagination li {
     list-style: none;
   }
@@ -341,34 +413,70 @@ body::-webkit-scrollbar {
     text-decoration: underline;
   }
 
-  .api-forms{
-    color: white;
-  }
+ 
+.filter-page {
+  background-color: white;
+  width: 290px;
+  height: 290px;
+  position: absolute;
+  margin: 25px 60px;
+  border-radius: 25px;
+}
 
-  .api-text-h1 {
-    font-size: 28px;
-    color: #007BFF;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  }
+.filter-element{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 25px;  
+}
+
+.filter-element p {
+  color: #565656;
+  font-size: 14px;
+  font-family: "FiraGO", sans-serif;
+  font-weight: 600;
+}
+
+.additional-content {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+}
+
+.text-in-filter{
+  margin-left: 5px;
+}
+
+.api-forms {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.api-forms > div {
+  border: 1px solid #e1e1e1;
+  padding: 20px;
+  margin: 10px 0;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.api-text-h1 {
+  font-size: 24px;
+  margin: 0;
+}
 
 .api-text-h2 {
   font-size: 20px;
-  color: #FF5733;
-  font-weight: normal;
-  margin-bottom: 8px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+  color: #0078d4;
 }
 
 .api-text-p {
   font-size: 16px;
-  color: #333;
-  line-height: 1.5;
-  margin-bottom: 20px;
-  border-left: 4px solid #4CAF50;
-  padding-left: 10px;
-  background-color: #F5F5F5;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
 }
+

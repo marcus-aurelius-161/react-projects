@@ -2,6 +2,7 @@ import React from "react";
 import SearchIcon from "./assets/search.png"
 import FilterLogo from "./assets/Vector.png"
 import data from "./Data";
+import ChevronFilter from "./assets/chevron-filter.png"
 import { useState } from "react";
 import { BsChevronDoubleLeft, BsChevronDoubleRight, BsChevronLeft, BsChevronRight, BsChevronExpand } from "react-icons/bs";
  
@@ -10,15 +11,31 @@ function FormTable() {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [sortAscending, setSortAscending] = useState(null);
+  const [filterPage, setFilterPage] = useState(false);
+  const [expandStatus, setExpandStatus] = useState(false);
+  const [expandGender, setExpandGender] = useState(false);
+  const [activeChecked, setActiveChecked] = useState(true);
+  const [inactiveChecked, setInactiveChecked] = useState(true);
+  const [genderMaleChecked, setGenderMaleChecked] = useState(true);
+  const [genderFemaleChecked, setGenderFemaleChecked] = useState(true);
   const lastIndex = currentPage * itemsPerPage;
   const firstIndex = lastIndex - itemsPerPage;
   const items = data.slice(firstIndex, lastIndex);
   const numPages = Math.ceil(data.length / itemsPerPage);
+  
 
   const nextPage = () => {
     if (currentPage < numPages) {
       setCurrentPage(currentPage + 1);
     }
+  };
+
+  const toggleStatusExpansion = () => {
+    setExpandStatus(!expandStatus);
+  };
+
+  const toggleGenderExpansion = () => {
+    setExpandGender(!expandGender);
   };
 
   const prevPage = () => {
@@ -57,10 +74,30 @@ function FormTable() {
     }
   };
 
+  const filteredData = data
+  .filter((student) => {
+    if ((!genderMaleChecked && !genderFemaleChecked) || (genderMaleChecked && genderFemaleChecked)) {
+      return true;
+    } else if (genderMaleChecked) {
+      return student.gender === "male";
+    } else if (genderFemaleChecked) {
+      return student.gender === "female";
+    }
+  })
+  .filter((student) => {
+    if ((!activeChecked && !inactiveChecked) || (activeChecked && inactiveChecked)) {
+      return true;
+    } else if (activeChecked) {
+      return student.status === "active";
+    } else if (inactiveChecked) {
+      return student.status === "inactive";
+    }
+  }); 
+
     return(
-        <main>
+      <main>
                 <div className="button-and-search">
-            <button className="filter-button">
+            <button className="filter-button" onClick={() => setFilterPage(!filterPage)}>
           <img src={FilterLogo} alt="" className="filter-logo" />
           filter
           
@@ -74,6 +111,85 @@ function FormTable() {
             />
         </div>
             </div>
+
+          {filterPage && <div className="filter-page">
+                  <div className="filter-element" onClick={toggleStatusExpansion}>
+                    <img src={ChevronFilter} alt="" />
+                    <p className="text-in-filter">სტუდენტის სტატუსი</p>
+                  </div>
+                      {expandStatus && ( <div className="additional-content">
+                      <label
+                htmlFor=""
+                style={{
+                  fontFamily: "Montserrat",
+                  fontWeight: "400",
+                  accentColor: "#3669A2",
+                }}
+              >
+                <input
+                  type="checkbox"
+                  value="active"
+                  checked={activeChecked}
+                  onChange={() => setActiveChecked((prev) => !prev)}
+                />
+                ACTIVE
+              </label>
+                      <label
+                htmlFor=""
+                style={{
+                  fontFamily: "Montserrat",
+                  fontWeight: "400",
+                  accentColor: "#3669A2",
+                }}
+              >
+                <input
+                  type="checkbox"
+                  value="inactive"
+                  checked={inactiveChecked}
+                  onChange={() => setInactiveChecked((prev) => !prev)}
+                />
+                INACTIVE
+              </label>
+          </div>)}
+                  <div className="filter-element" onClick={toggleGenderExpansion}> 
+                  <img src={ChevronFilter} alt="" />
+                    <p className="text-in-filter">სქესი</p>
+                  </div> 
+                  {expandGender && ( <div className="additional-content">
+                  <label
+                htmlFor=""
+                style={{
+                  fontFamily: "Montserrat",
+                  fontWeight: "400",
+                  accentColor: "#3669A2",
+                }}
+              >
+                <input
+                  type="checkbox"
+                  value="male"
+                  checked={genderMaleChecked}
+                  onChange={() => setGenderMaleChecked((prev) => !prev)}
+                />
+                MALE
+              </label>
+              <label
+                htmlFor=""
+                style={{
+                  fontFamily: "Montserrat",
+                  fontWeight: "400",
+                  accentColor: "#3669A2",
+                }}
+              >
+                <input
+                  type="checkbox"
+                  value="female"
+                  checked={genderFemaleChecked}
+                  onChange={() => setGenderFemaleChecked((prev) => !prev)}
+                />
+                FEMALE
+              </label>
+          </div>)}
+                  </div> }
 
                <div className="table-container">
 

@@ -46,8 +46,8 @@ function ApiPage() {
     return(
         <div className="api-forms">
             {apiData.slice(firstIndex, lastIndex).map((student, index) => (<div key={index}>
-                <h1 className="api-text-h1">{student.userID}</h1>
-                <h2 className="api-text-h2">{student.title}</h2>
+                <h1 className="api-text-h2">{student.title}</h1>
+                <h2 className="api-text-h1">{student.userID}</h2>
                 <p className="api-text-p">{student.body}</p>
 
             </div>))}
