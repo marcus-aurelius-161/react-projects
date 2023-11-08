@@ -14,8 +14,8 @@ function FormTable() {
   const [filterPage, setFilterPage] = useState(false);
   const [expandStatus, setExpandStatus] = useState(false);
   const [expandGender, setExpandGender] = useState(false);
-  const [activeChecked, setActiveChecked] = useState(true);
-  const [inactiveChecked, setInactiveChecked] = useState(true);
+  const [activeStatus, setActiveStatus] = useState(true);
+  const [inactiveStatus, setInactiveStatus] = useState(true);
   const [genderMaleChecked, setGenderMaleChecked] = useState(true);
   const [genderFemaleChecked, setGenderFemaleChecked] = useState(true);
   const lastIndex = currentPage * itemsPerPage;
@@ -76,23 +76,27 @@ function FormTable() {
 
   const filteredData = data
   .filter((student) => {
-    if ((!genderMaleChecked && !genderFemaleChecked) || (genderMaleChecked && genderFemaleChecked)) {
-      return true;
-    } else if (genderMaleChecked) {
-      return student.gender === "male";
-    } else if (genderFemaleChecked) {
-      return student.gender === "female";
+    if(genderMaleChecked && !genderFemaleChecked) {
+      return student.gender == 'male'; 
+    } else if (!genderMaleChecked && genderFemaleChecked) {
+      return student.gender == 'female';
+    } else if (genderMaleChecked && genderFemaleChecked) {
+      return student
+    } else {
+      return null;
     }
-  })
-  .filter((student) => {
-    if ((!activeChecked && !inactiveChecked) || (activeChecked && inactiveChecked)) {
-      return true;
-    } else if (activeChecked) {
-      return student.status === "active";
-    } else if (inactiveChecked) {
-      return student.status === "inactive";
+    
     }
-  }); 
+  )
+  // .filter((student) => {
+  //   if ((!activeStatus && !inactiveStatus) || (activeStatus && inactiveStatus)) {
+  //     return true;
+  //   } else if (activeStatus) {
+  //     return student.status === "active";
+  //   } else if (inactiveStatus) {
+  //     return student.status === "inactive";
+  //   }
+  // }); 
 
     return(
       <main>
@@ -129,8 +133,8 @@ function FormTable() {
                 <input
                   type="checkbox"
                   value="active"
-                  checked={activeChecked}
-                  onChange={() => setActiveChecked((prev) => !prev)}
+                  checked={activeStatus}
+                  onChange={() => setActiveStatus((prev) => !prev)}
                 />
                 ACTIVE
               </label>
@@ -145,8 +149,8 @@ function FormTable() {
                 <input
                   type="checkbox"
                   value="inactive"
-                  checked={inactiveChecked}
-                  onChange={() => setInactiveChecked((prev) => !prev)}
+                  checked={inactiveStatus}
+                  onChange={() => setInactiveStatus((prev) => !prev)}
                 />
                 INACTIVE
               </label>
@@ -228,7 +232,7 @@ function FormTable() {
                     </thead>
                     
                     <tbody>
-          {sortedData.slice(firstIndex, lastIndex).map((student, index) => (
+          {filteredData.slice(firstIndex, lastIndex).map((student, index) => (
             <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
               <td>{student.name}</td>
               <td>{student.status}</td>

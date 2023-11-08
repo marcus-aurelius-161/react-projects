@@ -1,7 +1,4 @@
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: black;
 }
 
@@ -98,6 +95,7 @@ body::-webkit-scrollbar {
 
 .log-out-button:hover {
   background-color: #4c8ff7; 
+  font-size: 20px;
   transform: scale(1.1); 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
@@ -333,21 +331,26 @@ body::-webkit-scrollbar {
   .form-table{
     width: 200%;
     border-collapse: collapse;   
-    overflow: hidden; 
     height: 650px;
+    overflow: hidden; 
   }  
+
+  .form-table tr, .form-table td, .form-table th {
+    border: 0;
+  }
 
   .table-container {
     overflow-x: scroll;
-    width: 1200px;
+    width: 1180px;
     border-radius: 10px;
     margin: 25px auto; 
+    background-color: white;
   }
 
   .form-table thead{
+    border-bottom: 1px solid #315C8E;
     height: 90px;
     background-color: white;
-    border-bottom: 1px solid #315C8E;
   }
   
   .form-table thead th {
@@ -368,7 +371,29 @@ body::-webkit-scrollbar {
     font-weight: 400;
     text-align: center;
     width: 75px;
+    height: 75px;
   }
+  
+  ::-webkit-scrollbar {
+    height: 25px;
+    margin:10px;
+    background-color: white;
+    }
+    
+    ::-webkit-scrollbar-track {
+    border: 1px solid #E9E9E9; 
+    -webkit-border-radius: 10px;
+    height: 25px; 
+    border-radius: 10px;
+    } 
+    
+    ::-webkit-scrollbar-thumb {
+    width: 600px;
+    height: 15px;
+    border-radius: 25px;
+    background-color: #CFCFCF;
+    border: 2px solid white;
+    }
   
 
   .chevron {
@@ -420,7 +445,7 @@ body::-webkit-scrollbar {
   height: 290px;
   position: absolute;
   margin: 25px 60px;
-  border-radius: 25px;
+  border-radius: 10px;
 }
 
 .filter-element{
