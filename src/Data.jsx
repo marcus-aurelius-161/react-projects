@@ -397,7 +397,7 @@ const data = [
     },
     {
         name: "Eleni Antoniou",
-        status: "Active",
+        status: "Inactive",
         gender: "Female",
         grade: 64,
         phoneNumber: "456-222-1230",
@@ -408,7 +408,7 @@ const data = [
     },
     {
         name: "İpek Kaya",
-        status: "Active",
+        status: "Inactive",
         gender: "Female",
         grade: 74,
         phoneNumber: "333-789-4560",
@@ -496,7 +496,7 @@ const data = [
     },
     {
         name: "Nana Kakhadze",
-        status: "Active",
+        status: "Inactive",
         gender: "Female",
         grade: 66,
         phoneNumber: "321-654-9870",

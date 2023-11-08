@@ -373,6 +373,10 @@ body::-webkit-scrollbar {
     width: 75px;
     height: 75px;
   }
+
+  .sort-grades-chevron{
+    cursor: pointer;
+  }
   
   ::-webkit-scrollbar {
     height: 25px;
@@ -461,6 +465,13 @@ body::-webkit-scrollbar {
   font-size: 14px;
   font-family: "FiraGO", sans-serif;
   font-weight: 600;
+}
+
+label {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    accent-color: #3669A2;
+                  
 }
 
 .additional-content {

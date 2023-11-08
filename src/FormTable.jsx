@@ -74,30 +74,6 @@ function FormTable() {
     }
   };
 
-  const filteredData = data
-  .filter((student) => {
-    if(genderMaleChecked && !genderFemaleChecked) {
-      return student.gender == 'male'; 
-    } else if (!genderMaleChecked && genderFemaleChecked) {
-      return student.gender == 'female';
-    } else if (genderMaleChecked && genderFemaleChecked) {
-      return student
-    } else {
-      return null;
-    }
-    
-    }
-  )
-  // .filter((student) => {
-  //   if ((!activeStatus && !inactiveStatus) || (activeStatus && inactiveStatus)) {
-  //     return true;
-  //   } else if (activeStatus) {
-  //     return student.status === "active";
-  //   } else if (inactiveStatus) {
-  //     return student.status === "inactive";
-  //   }
-  // }); 
-
     return(
       <main>
                 <div className="button-and-search">
@@ -124,15 +100,10 @@ function FormTable() {
                       {expandStatus && ( <div className="additional-content">
                       <label
                 htmlFor=""
-                style={{
-                  fontFamily: "Montserrat",
-                  fontWeight: "400",
-                  accentColor: "#3669A2",
-                }}
               >
                 <input
                   type="checkbox"
-                  value="active"
+                  value="Active"
                   checked={activeStatus}
                   onChange={() => setActiveStatus((prev) => !prev)}
                 />
@@ -140,15 +111,10 @@ function FormTable() {
               </label>
                       <label
                 htmlFor=""
-                style={{
-                  fontFamily: "Montserrat",
-                  fontWeight: "400",
-                  accentColor: "#3669A2",
-                }}
               >
                 <input
                   type="checkbox"
-                  value="inactive"
+                  value="Inactive"
                   checked={inactiveStatus}
                   onChange={() => setInactiveStatus((prev) => !prev)}
                 />
@@ -162,31 +128,21 @@ function FormTable() {
                   {expandGender && ( <div className="additional-content">
                   <label
                 htmlFor=""
-                style={{
-                  fontFamily: "Montserrat",
-                  fontWeight: "400",
-                  accentColor: "#3669A2",
-                }}
               >
                 <input
                   type="checkbox"
-                  value="male"
+                  value="Male"
                   checked={genderMaleChecked}
                   onChange={() => setGenderMaleChecked((prev) => !prev)}
                 />
                 MALE
               </label>
               <label
-                htmlFor=""
-                style={{
-                  fontFamily: "Montserrat",
-                  fontWeight: "400",
-                  accentColor: "#3669A2",
-                }}
+                htmlFor=""            
               >
                 <input
                   type="checkbox"
-                  value="female"
+                  value="Female"
                   checked={genderFemaleChecked}
                   onChange={() => setGenderFemaleChecked((prev) => !prev)}
                 />
@@ -211,7 +167,7 @@ function FormTable() {
                             </th>
                             <th>
                             ქულები
-                           <BsChevronExpand size={20} onClick={toggleSort}/>
+                           <BsChevronExpand size={20} onClick={toggleSort} className="sort-grades-chevron"/>
                             </th>
                             <th>
                             პირადი ნომერი
@@ -232,7 +188,26 @@ function FormTable() {
                     </thead>
                     
                     <tbody>
-          {filteredData.slice(firstIndex, lastIndex).map((student, index) => (
+          {sortedData.slice(firstIndex, lastIndex).filter((student) => {
+    if(genderMaleChecked && !genderFemaleChecked) {
+      return student.gender == 'Male'; 
+    } else if (!genderMaleChecked && genderFemaleChecked) {
+      return student.gender == 'Female';
+    } else if (genderMaleChecked && genderFemaleChecked) {
+      return student
+    } else {
+      return null;
+    }}).filter((student) => {
+      if (activeStatus && !inactiveStatus) {
+        return student.status === "Active";
+      } else if (!activeStatus && inactiveStatus) {
+        return student.status === "Inactive";
+      } else if (activeStatus && inactiveStatus) {
+        return student;
+      } else {
+        return null;
+      }
+    }).map((student, index) => (
             <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
               <td>{student.name}</td>
               <td>{student.status}</td>
